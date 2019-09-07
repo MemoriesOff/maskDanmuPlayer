@@ -43,10 +43,15 @@ For the convenience of debugging, we haven't packaged or compressed the code.
 #### Inputs
 
 **width** the player's width
+
 **height** the player's height. Note:only the video's height, all the player's height will be this add 37px;
+
 **src** the video file route
+
 **comments** the Danmu file route. More information can be find [here](https://github.com/jabbany/CommentCoreLibrary/tree/master/docs/data-formats)
+
 **modelAddress** the address of the cheakpoint. you can find one cheakpoint at [here](https://github.com/MemoriesOff/github_blog/tree/gh-pages/static/semanticDemo/web_model).All files in the folder is necessary and the modelAddress means the route of the "model.json". For example, if you want to use our model weight, the modelAddress can be given as "http://www.acgtrip.com/static/semanticDemoweb_model/model.json".
+
 **testcanva** if you want to show the mask layer for test, give the canve object here. 
 
 ## About the Semantic-Segmentation network.
