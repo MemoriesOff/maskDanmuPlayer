@@ -11,13 +11,13 @@ You can use this as standalone es5 bundle like this:
 
 ```html
 	<script src="js/jquery-2.1.4.min.js"></script>
-  <script src="js/CommentCoreLibrary.js"></script>
+        <script src="js/CommentCoreLibrary.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
 	<script src="js/util.js"></script>
 	<script src="js/ModelWeights.js"></script>
 	<script src="js/mobileNet.js"></script>
 	<script src="js/SemanticSegmentation.js"></script>
-  <script src="js/maskDanmuPlayer.js"></script>
+        <script src="js/maskDanmuPlayer.js"></script>
 ```
 
 For the convenience of debugging, we haven't packaged or compressed the code.
