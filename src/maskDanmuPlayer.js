@@ -24,7 +24,7 @@
 		var networkOffButton=$($(controlBoard).children(".line").get(0)).children(".button").get(1);
 		var fcn32OnButton=$($(controlBoard).children(".line").get(1)).children(".button").get(0);
 		var fcn32OffButton=$($(controlBoard).children(".line").get(1)).children(".button").get(1);
-		//danmuLayer.style.webkitMaskSize="cover";
+		danmuLayer.style.webkitMaskSize="cover";
 		var maskLayer=videodiv.children(".mask-layer").get(0);
 		var maskLayerCTX=maskLayer.getContext('2d');
 		videodiv.append("<div class=\"time-reminding\">12:12</div>");
@@ -113,8 +113,6 @@
 			if(!video.paused&&isModelLoad&&isDanmuOn&&isNetworkOn){				
 				console.time()					
 				var netOutput;
-				var canva;
-				var ctx;
 				if(isFcn32On){
 					network.modelPixels=[288,512];
 					netOutput=await network.predict(video,false,true).data();
@@ -123,30 +121,37 @@
 					netOutput=await network.predict(video,true,false).data();						
 				}			
 				maskLayerCTX.clearRect(0, 0, player.defaults.width, player.defaults.height);
+				//maskLayerCTX.drawImage(video, 0, 0,  player.defaults.width, player.defaults.height);
 				maskLayerCTX.fillStyle="#000000";
 				maskLayerCTX.fillRect(0,0,player.defaults.width,player.defaults.height);
-				var maskLayerImageDate=maskLayerCTX.getImageData(0, 0, player.defaults.width ,player.defaults.height);												
-				if(isFcn32On){
-					for(var i=0;i<netOutput.length;i++){
-						if(netOutput[i]==15) //0.85
-						{
-						   maskLayerImageDate.data[4*i+3]=0;								   
+				var maskLayerImageDate=maskLayerCTX.getImageData(0, 0, player.defaults.width ,player.defaults.height);
+
+				await async()=>{
+					if(isFcn32On){
+						for(var i=0;i<netOutput.length;i++){
+							if(netOutput[i]==15) //0.85
+							{						  			
+							   /*maskLayerImageDate.data[4*i+0]=255;
+							   maskLayerImageDate.data[4*i+1]=255;
+							   maskLayerImageDate.data[4*i+2]=255;*/
+							   maskLayerImageDate.data[4*i+3]=0;								   
+							}
 						}
-					}
-				}else{
-					for(var i=0;i<netOutput.length;i++){
-						if(netOutput[i]>0.85) //0.85
-						{
-						   maskLayerImageDate.data[4*i+3]=0;								   
+					}else{
+						for(var i=0;i<netOutput.length;i++){
+							if(netOutput[i]>0.85) //0.85
+							{									
+							   /*maskLayerImageDate.data[4*i+0]=255;
+							   maskLayerImageDate.data[4*i+1]=255;
+							   maskLayerImageDate.data[4*i+2]=255;*/
+							   maskLayerImageDate.data[4*i+3]=0;								   
+							}
 						}
 					}
 				}
-				maskLayerCTX.putImageData(maskLayerImageDate,0, 0);					
-				//danmuLayer.style.webkitMaskImage="url("+maskLayer.toDataURL("image/png")+")";
-				$(danmuLayer).css("-webkit-mask-image","url("+maskLayer.toDataURL("image/png",0.5)+")")
 				if(player.defaults.testcanva!=null){
-					canva=player.defaults.testcanva;
-					ctx=canva.getContext('2d');	 
+					var canva=player.defaults.testcanva;//document.getElementById("myCanvas");
+					var ctx=canva.getContext('2d');	 
 					ctx.clearRect(0, 0,  player.defaults.width, player.defaults.height);
 					ctx.drawImage(video, 0, 0,  player.defaults.width, player.defaults.height);
 					var imgData=ctx.getImageData(0, 0, player.defaults.width, player.defaults.height);
@@ -168,19 +173,28 @@
 							}
 						}
 					}
+					
 					ctx.putImageData(imgData,0, 0);
 				}
+
+				maskLayerCTX.putImageData(maskLayerImageDate,0, 0);	
+
+				//danmuLayer.style.webkitMaskImage="url("+maskLayer.toDataURL("image/png",0.5)+")"
+				
+				//$(danmuLayer).css("-webkit-mask-image","url("+maskLayer.toDataURL("image/png",0.5)+")")
+				
+				
 				console.timeEnd()	
 				
 			}else{
-				if((!isDanmuOn)||(!isNetworkOn))
-					danmuLayer.style.webkitMaskImage=null;
+				if(!isNetworkOn)
+				{danmuLayer.style.webkitMaskImage=null};
 			}
 			requestAnimationFrame(maskLayerPercess);
 		}
 		
 		
-		maskLayerPercess();
+		maskLayerPercess()
 		//setTimeout(()=>{setInterval(function () {maskLayerPercess()},1000);}, 2000 );
 		
 		//播放暂停事件
@@ -250,7 +264,7 @@
 			isControlBoardIn=false;
 		});
 		var isNetworkOn=true;
-		var isFcn32On=false;
+		var isFcn32On=true;
 		$(networkOffButton).css("background","#5C5C5C");
 		networkOnButton.onclick=()=>{
 			$(networkOffButton).css("background","#5C5C5C")
@@ -262,7 +276,7 @@
 			$(networkOffButton).css("background","#00A1D6")
 			isNetworkOn=false;
 		};
-		$(fcn32OnButton).css("background","#5C5C5C")
+		$(fcn32OffButton).css("background","#5C5C5C")
 		fcn32OnButton.onclick=()=>{
 			$(fcn32OffButton).css("background","#5C5C5C")
 			$(fcn32OnButton).css("background","#00A1D6")
