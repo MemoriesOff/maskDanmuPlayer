@@ -10,14 +10,15 @@ A smart DanmuPlayer with a function to prevent people from being blocked.
 You can use this as standalone es5 bundle like this:
 
 ```html
-	<script src="js/jquery-2.1.4.min.js"></script>
-        <script src="js/CommentCoreLibrary.js"></script>
+        <link rel="stylesheet" href="src/maskDanmuPlayer.css"/>
+	<script src="src/jquery-2.1.4.min.js"></script>
+        <script src="src/CommentCoreLibrary.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.0"></script>
-	<script src="js/util.js"></script>
-	<script src="js/ModelWeights.js"></script>
-	<script src="js/mobileNet.js"></script>
-	<script src="js/SemanticSegmentation.js"></script>
-        <script src="js/maskDanmuPlayer.js"></script>
+	<script src="src/util.js"></script>
+	<script src="src/ModelWeights.js"></script>
+	<script src="src/mobileNet.js"></script>
+	<script src="src/SemanticSegmentation.js"></script>
+        <script src="src/maskDanmuPlayer.js"></script>
 ```
 
 For the convenience of debugging, we haven't packaged or compressed the code.
