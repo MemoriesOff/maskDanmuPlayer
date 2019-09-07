@@ -1,4 +1,4 @@
-# maskDanmuPlayer
+# MaskDanmuPlayer
 
 A smart DanmuPlayer with a function to prevent people from being blocked.
 
