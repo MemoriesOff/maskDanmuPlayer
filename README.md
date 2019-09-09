@@ -69,4 +69,4 @@ This work use the danmaku comments [CommentCoreLibrary](https://github.com/jabba
 
 ## License
 
-The program is licensed licensed [MIT](http://opensource.org/licenses/mit-license.php).
+The program is licensed [MIT](http://opensource.org/licenses/mit-license.php).
